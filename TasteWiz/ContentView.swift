@@ -246,7 +246,7 @@ struct ContentView: View {
     private func sendPromptToChatGPT(prompt: String) {
         isLoading = false
         isRecipePopupVisible = true
-        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
+        guard let url = URL(string: "") else {
             print("Invalid URL")
             return
         }
@@ -257,8 +257,8 @@ struct ContentView: View {
         request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         
         let parameters: [String: Any] = [
-            "model": "gpt-3.5-turbo",
-            "messages": [["role": "user", "content": prompt]]
+            "model": "",
+            "messages": [[: prompt]]
         ]
         
         do {

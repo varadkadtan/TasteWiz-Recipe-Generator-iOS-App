@@ -125,7 +125,7 @@ struct SScannerPage: View {
     }
 
     private func sendPromptToChatGPT(prompt: String) {
-        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
+        guard let url = URL(string: "") else {
             print("Invalid URL")
             return
         }
@@ -136,8 +136,8 @@ struct SScannerPage: View {
         request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
 
         let parameters: [String: Any] = [
-            "model": "gpt-3.5-turbo",
-            "messages": [["role": "user", "content": prompt]]
+            "model": "",
+            "messages": [[: prompt]]
         ]
 
         do {
@@ -319,7 +319,7 @@ struct RRecipeGeneratedPage: View, Identifiable {
     }
 
     private func sendPromptToChatGPT(prompt: String) {
-        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
+        guard let url = URL(string: "BASED ON YOUR MODEL") else {
             print("Invalid URL")
             return
         }
@@ -330,8 +330,8 @@ struct RRecipeGeneratedPage: View, Identifiable {
         request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         
         let parameters: [String: Any] = [
-            "model": "gpt-3.5-turbo",
-            "messages": [["role": "user", "content": prompt]]
+            "model": "YOUR-MODEL-NAME",
+            "messages": [["ACCORDING TO YOUR MODEL": prompt]]
         ]
         
         do {
