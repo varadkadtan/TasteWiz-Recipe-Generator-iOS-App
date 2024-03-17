@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var isFetchingRecipe = false
     @State private var isCameraActive = true
     
-    let apiKey = ""
+    
     
     var body: some View {
         NavigationView {

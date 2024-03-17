@@ -13,7 +13,7 @@ struct SScannerPage: View {
     @State private var generatedRecipeTitles: [String] = []
     @State private var selectedRecipeTitle: IdentifiableString? = nil
 
-    let apiKey = ""
+    
 
     var body: some View {
         ZStack {
@@ -266,7 +266,7 @@ struct RRecipeGeneratedPage: View, Identifiable {
     var id = UUID()
     var recipeTitle: String
     var selectedVegetables: [String]
-    let apiKey = ""
+    
 
     @State private var isFetchingRecipe = true
     @State private var generatedRecipe: String = ""
