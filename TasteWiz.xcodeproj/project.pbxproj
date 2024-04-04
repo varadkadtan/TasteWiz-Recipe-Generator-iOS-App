@@ -12,7 +12,6 @@
 		19517EC82B454EA6002EF166 /* RecipePage5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19517EC72B454EA6002EF166 /* RecipePage5.swift */; };
 		19517ECA2B454ECA002EF166 /* RecipePage6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19517EC92B454ECA002EF166 /* RecipePage6.swift */; };
 		195917FF2B3D8D6900E872CE /* TasteWizApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195917FE2B3D8D6900E872CE /* TasteWizApp.swift */; };
-		195918012B3D8D6900E872CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195918002B3D8D6900E872CE /* ContentView.swift */; };
 		195918032B3D8D6A00E872CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 195918022B3D8D6A00E872CE /* Assets.xcassets */; };
 		195918062B3D8D6A00E872CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 195918052B3D8D6A00E872CE /* Preview Assets.xcassets */; };
 		1959180F2B3D9E7000E872CE /* ScannerPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1959180E2B3D9E7000E872CE /* ScannerPage.swift */; };
@@ -26,7 +25,11 @@
 		7FAE06562B86031800F41C05 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAE06552B86031800F41C05 /* Posts.swift */; };
 		7FEE10972B56604200BCEC43 /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7FEE10962B56604200BCEC43 /* OpenAISwift */; };
 		7FF805372B88A43F002917CE /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF805362B88A43F002917CE /* ProfilePage.swift */; };
-		847621BC2B920BD5005CA56C /* TasteWizOD.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 847621BB2B920BD5005CA56C /* TasteWizOD.mlmodel */; };
+		808EACD22BAF1A6700B28BBC /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 808EACD12BAF1A6700B28BBC /* Fonts */; };
+		808EACE02BB05FAD00B28BBC /* ContentViewP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EACDF2BB05FAD00B28BBC /* ContentViewP.swift */; };
+		808EACE42BB061CB00B28BBC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EACE32BB061CB00B28BBC /* ContentView.swift */; };
+		808EACE62BB08AE200B28BBC /* PrefPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808EACE52BB08AE100B28BBC /* PrefPage.swift */; };
+		808EACEA2BB31AFC00B28BBC /* TasteWizOD.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 808EACE92BB31AFC00B28BBC /* TasteWizOD.mlmodel */; };
 		847621BE2B92386D005CA56C /* KeyboardAwareModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847621BD2B92386D005CA56C /* KeyboardAwareModifier.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +40,6 @@
 		19517EC92B454ECA002EF166 /* RecipePage6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePage6.swift; sourceTree = "<group>"; };
 		195917FB2B3D8D6900E872CE /* TasteWiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TasteWiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		195917FE2B3D8D6900E872CE /* TasteWizApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasteWizApp.swift; sourceTree = "<group>"; };
-		195918002B3D8D6900E872CE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		195918022B3D8D6A00E872CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		195918052B3D8D6A00E872CE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1959180E2B3D9E7000E872CE /* ScannerPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerPage.swift; sourceTree = "<group>"; };
@@ -51,7 +53,11 @@
 		7FAE06542B85E40500F41C05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7FAE06552B86031800F41C05 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		7FF805362B88A43F002917CE /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
-		847621BB2B920BD5005CA56C /* TasteWizOD.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TasteWizOD.mlmodel; sourceTree = SOURCE_ROOT; };
+		808EACD12BAF1A6700B28BBC /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Fonts; sourceTree = "<group>"; };
+		808EACDF2BB05FAD00B28BBC /* ContentViewP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewP.swift; sourceTree = "<group>"; };
+		808EACE32BB061CB00B28BBC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		808EACE52BB08AE100B28BBC /* PrefPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefPage.swift; sourceTree = "<group>"; };
+		808EACE92BB31AFC00B28BBC /* TasteWizOD.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TasteWizOD.mlmodel; sourceTree = "<group>"; };
 		847621BD2B92386D005CA56C /* KeyboardAwareModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardAwareModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,14 +94,17 @@
 			children = (
 				7FAE06542B85E40500F41C05 /* Info.plist */,
 				195917FE2B3D8D6900E872CE /* TasteWizApp.swift */,
+				808EACE32BB061CB00B28BBC /* ContentView.swift */,
 				19C04EF92B401F4E00CB76F4 /* StartPage.swift */,
+				808EACE52BB08AE100B28BBC /* PrefPage.swift */,
+				808EACE92BB31AFC00B28BBC /* TasteWizOD.mlmodel */,
 				19C04EFB2B40206F00CB76F4 /* StartPage2.swift */,
+				808EACD12BAF1A6700B28BBC /* Fonts */,
 				19C04EFD2B40229400CB76F4 /* SignInPage.swift */,
-				195918002B3D8D6900E872CE /* ContentView.swift */,
 				1959180E2B3D9E7000E872CE /* ScannerPage.swift */,
 				19C04F012B4025FB00CB76F4 /* RecipeGeneratedPage.swift */,
+				808EACDF2BB05FAD00B28BBC /* ContentViewP.swift */,
 				195918122B3DA68600E872CE /* RecipePage.swift */,
-				847621BB2B920BD5005CA56C /* TasteWizOD.mlmodel */,
 				195918142B3DA89600E872CE /* RecipePage2.swift */,
 				19517EC32B454DD8002EF166 /* RecipePage3.swift */,
 				19517EC52B454E82002EF166 /* RecipePage4.swift */,
@@ -183,6 +192,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				808EACD22BAF1A6700B28BBC /* Fonts in Resources */,
 				195918062B3D8D6A00E872CE /* Preview Assets.xcassets in Resources */,
 				195918032B3D8D6A00E872CE /* Assets.xcassets in Resources */,
 			);
@@ -196,18 +206,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FF805372B88A43F002917CE /* ProfilePage.swift in Sources */,
+				808EACE02BB05FAD00B28BBC /* ContentViewP.swift in Sources */,
 				7FAE06562B86031800F41C05 /* Posts.swift in Sources */,
 				19517EC42B454DD8002EF166 /* RecipePage3.swift in Sources */,
 				19C04EFE2B40229400CB76F4 /* SignInPage.swift in Sources */,
+				808EACEA2BB31AFC00B28BBC /* TasteWizOD.mlmodel in Sources */,
 				195918152B3DA89600E872CE /* RecipePage2.swift in Sources */,
 				19C04EFA2B401F4E00CB76F4 /* StartPage.swift in Sources */,
+				808EACE62BB08AE200B28BBC /* PrefPage.swift in Sources */,
 				19C04F022B4025FB00CB76F4 /* RecipeGeneratedPage.swift in Sources */,
+				808EACE42BB061CB00B28BBC /* ContentView.swift in Sources */,
 				195918132B3DA68600E872CE /* RecipePage.swift in Sources */,
 				19517EC82B454EA6002EF166 /* RecipePage5.swift in Sources */,
-				195918012B3D8D6900E872CE /* ContentView.swift in Sources */,
 				847621BE2B92386D005CA56C /* KeyboardAwareModifier.swift in Sources */,
 				195917FF2B3D8D6900E872CE /* TasteWizApp.swift in Sources */,
-				847621BC2B920BD5005CA56C /* TasteWizOD.mlmodel in Sources */,
 				19517ECA2B454ECA002EF166 /* RecipePage6.swift in Sources */,
 				19517EC62B454E82002EF166 /* RecipePage4.swift in Sources */,
 				7FA51B522B55405700D741A0 /* SScannerPage.swift in Sources */,

@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Scan_Vector_PNG_Images__Vector_Scan_Icon__Scan_Icons__Scan__Eye_PNG_Image_For_Free_Download-removebg-preview 2.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

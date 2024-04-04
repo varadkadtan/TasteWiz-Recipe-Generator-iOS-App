@@ -1,235 +1,361 @@
 import SwiftUI
+import Foundation
 
 struct ContentView: View {
+    
     @State private var showProfilePage = false
+    
+    @StateObject var selectedPreferences = SelectedPreferences()
+
     @State private var profileRecipe: (String, UIImage?)?
     @State private var savedRecipe: String?
     @State private var savedRecipes: [(String, UIImage)] = []
     @State private var isLoading = false
     @State private var chat = ""
+   
     @State private var generatedRecipe = ""
     @State private var isRecipePopupVisible = false
     @State private var isFetchingRecipe = false
     @State private var isCameraActive = true
+    @State private var currentIndex: Int = 0
+    @State private var timer: Timer?
     
+       let images = ["Image 36", "Image 37", "Image 38"] // Names of your images
     
+    let apiKey = "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"
     
     var body: some View {
+        
         NavigationView {
-            VStack {
-                HStack {
-                    Text("Good Morning Jenny!")
-                        .font(Font.custom("Epilogue", size: 27).weight(.bold))
-                        .foregroundColor(Color(red: 0.09, green: 0.1, blue: 0.12))
-                        .offset(x: -15)
+            GeometryReader { _ in
+            
+            ZStack{
+                
+                Rectangle()
+                
+                    .foregroundColor(.clear)
+                    .frame(width:429, height:899)
+                
+                //(red: 0.51, green: 0.73, blue: 0.71)
+            //    (red: 1, green: 0.89, blue: 0.57)
+                    .background(
+                        LinearGradient(
+                            stops: [
+                                Gradient.Stop(color: Color(red: 0.51, green: 0.73, blue: 0.71), location: 0.40),
+                                Gradient.Stop(color: .white.opacity(0.54), location: 1.00),
+                            ],
+                            startPoint: UnitPoint(x: 0.5, y: 0),
+                            endPoint: UnitPoint(x: 0.5, y: 1)
+                        )
+                    )
+                    .shadow(color: .black.opacity(0.25), radius: 12, x: 0, y: 4)
+                VStack{
                     
-                    NavigationLink(destination: ProfilePage()) {
-                        Circle()
-                            .fill(Color.clear)
-                            .frame(width: 62, height: 62)
-                            .overlay(
-                                Image("Image")
+                    HStack{
+                        VStack{
+                            Text("Hello Chef !")
+                                .font(
+                                    Font.custom("AvenirNextCondensed-Bold", size: 46)
+                                        .weight(.heavy)
+                                )
+                                
+                                .kerning(0.72)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Color(red: 0.27, green: 0.27, blue: 0.31))
+                                .frame(width: 259, height: 41, alignment: .top)
+                                .offset(x:8,y:-10)
+                            
+                            Text("Ready to Cook?")
+                                .font(
+                                    Font.custom("AvenirNextCondensed-Bold", size: 20)
+                                        .weight(.medium)
+                                )
+                                .kerning(0.4)
+                                .multilineTextAlignment(.center)
+                                .foregroundColor(Color(red: 0.42, green: 0.41, blue: 0.5))
+                                .frame(width: 155, height: 32, alignment: .top)
+                                .offset(x:-50)
+                            
+                        }
+                        .offset(x:-30,y:-30)
+                        
+                        Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: 78, height: 69)
+                            .background(
+                                Image("Image 30")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: 62, height: 62)
-                                    .clipShape(Circle())
-                                    .offset(x: 10)
+                                    .frame(width: 78, height: 69)
+                                    .clipped()
                             )
+                            .offset(x:2,y:-40)
                     }
-                    .navigationBarBackButtonHidden(true)
-                }
-                .offset(y: -55)
-                
-                Text("Ready for Breakfast?")
-                    .font(Font.custom("Inter", size: 14))
-                    .foregroundColor(Color(red: 0.56, green: 0.58, blue: 0.63))
-                    .offset(x: -110, y: -65)
-                
-                NavigationLink(destination: SScannerPage()) {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 351, height: 165)
-                        .background(
-                            Image("Image 20")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 371, height: 165)
-                                .clipped()
-                        )
-                        .cornerRadius(45)
-                        .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-                        .offset(y: -50)
-                }
-                
-                HStack {
-                    Text("Today's Picks")
-                        .font(Font.custom("Inter", size: 18))
-                        .foregroundColor(Color(red: 0.09, green: 0.1, blue: 0.12))
-                        .offset(x: -120)
-//                    Text("See All")
-//                        .font(Font.custom("Inter", size: 14))
-//                        .foregroundColor(Color(red: 0.09, green: 0.1, blue: 0.12))
-//                        .offset(x: 100)
-                }
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 16) {
-                        ForEach(0..<3) { _ in // Change 3 to the number of items you have
-                            ZStack {
-                                HStack {
-                                    VStack {
-                                        Text("Bread & Egg\nMorning Casserole")
-                                            .font(Font.custom("Inter", size: 16))
-                                            .foregroundColor(Color(red: 0.09, green: 0.1, blue: 0.12))
-                                            .offset(x: -20)
-                                        
-                                        Text("\"Egg, garlic clove, medium.")
-                                            .font(Font.custom("Inter", size: 14))
-                                            .foregroundColor(Color(red: 0.74, green: 0.76, blue: 0.79))
-                                            .offset(y: 10)
-                                    }
-                                    Rectangle()
-                                        .foregroundColor(.clear)
-                                        .frame(width: 102, height: 104)
-                                        .background(
-                                            Image("Image 1")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: 102, height: 104)
-                                                .clipped()
-                                        )
-                                        .cornerRadius(4)
-                                }
-                                .padding(.vertical, 20)
-                            }
-                            .frame(width: 321, height: 128)
-                            .background(Color(red: 1, green: 1, blue: 1))
-                            .cornerRadius(22.62477)
-                            .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-                            .offset(y: -35)
-                            .onTapGesture {
-                                generateRRecipe(for: "Bread and egg morning casserole")
-                            }
-                        }
-                    }
-                    .padding(.top, 30)
-                }
-                
-                ZStack {
-                    VStack {
-                        HStack {
-                            Text("Quick Search")
-                                .font(Font.custom("Inter", size: 14))
-                                .foregroundColor(.black)
-                                .offset(x: -130)
-                            
-//                            Text("Refresh")
-//                                .font(Font.custom("Inter", size: 14))
-//                                .foregroundColor(Color(red: 0.05, green: 0.05, blue: 0.05))
-//                                .offset(x: 80)
-//
-//                            Image("Image 2")
-//                                .frame(width: 16, height: 16)
-//                                .offset(x: 80)
-                        }
-                        .offset(y: -45)
+                    .offset(y:60)
+                    ZStack {
                         
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: -30) { // Use positive spacing
-                                ForEach(0..<3) { _ in
-                                    VStack(alignment: .leading, spacing: 4.66913) { // Bread Based Recipes
-                                        Text("Bread Based Recipes")
-                                            .font(Font.custom("Inter", size: 16))
-                                            .foregroundColor(Color(red: 0.15, green: 0.16, blue: 0.19))
-                                        
-                                        Text("Bread, garlic clove, medium\nonion, lemon juice")
-                                            .font(Font.custom("Inter", size: 16))
-                                            .foregroundColor(Color(red: 0.56, green: 0.58, blue: 0.63))
-                                            .frame(width: 205, alignment: .topLeading)
-                                    }
-                                    .padding(.leading, 19)
-                                    .padding(.trailing, 30)
-                                    .padding(.top, 19.31608)
-                                    .padding(.bottom, 10.01479)
-                                    .background(Color(red: 1, green: 0.98, blue: 0.98))
-                                    .cornerRadius(25)
-                                    .shadow(color: Color(red: 0.09, green: 0.1, blue: 0.12).opacity(0.07), radius: 0.5, x: 0, y: 0)
-                                    .shadow(color: Color(red: 0.09, green: 0.1, blue: 0.12).opacity(0.12), radius: 1, x: 0, y: 0)
-                                    .onTapGesture {
-                                        generateRRecipe(for: "Bread Based Recipe")
-                                    }
-                                    //.shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
-                                }
-                                .padding(.horizontal, 20) // Add padding to the HStack if needed
-                            }
-                        }
-
-                        .offset(y: -30) //white box finsih
                         
                         HStack {
                             TextField("How to make egg curry?", text: $chat)
-                                .font(Font.custom("Inter", size: 18))
+                                .font(Font.custom("Inter", size: 20))
                                 .foregroundColor(Color(red: 0.22, green: 0.22, blue: 0.22))
-                                .offset(x: 10)
+                                .padding(.leading, 23)
+                                .padding(.trailing, 0)
+                            // Adjust as needed
                             
                             Button(action: {
                                 generateRecipe()
                             }) {
-                                Image("Image 3")
+                                Image("Image 26")
                                     .frame(width: 24, height: 24)
-                                    .offset(x: -10)
                             }
-                            .sheet(isPresented: $isRecipePopupVisible) {
-                                RecipeDisplayPage(generatedRecipe: generatedRecipe)
+                            .padding(.trailing, 32)
+                        }
+                    }
+                    .frame(width: 370, height: 70.50849)
+                    .background(Color.white)
+                    .cornerRadius(15)
+                    .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
+                    .offset(y: 45)
+                    .sheet(isPresented: $isRecipePopupVisible) {
+                        RecipeDisplayPage(generatedRecipe: generatedRecipe)
+                    }
+                    
+                    
+                    
+                    VStack{
+                        ZStack{
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: 355, height: 181)
+                                .background(.white)
+                                .cornerRadius(17)
+                                .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
+                            
+                            Text("Turn your vegetables Into\nMagic !")
+                                
+                                .font(
+                                    Font.custom("AvenirNextCondensed-Bold", size: 24)
+                                        .weight(.bold)
+                                )
+                                .kerning(0.44)
+                                .foregroundColor(Color(red: 0.51, green: 0.73, blue: 0.71))
+                                .frame(width: 306, height: 67, alignment: .topLeading)
+                                .offset(y:-40)
+                            
+                            ZStack{
+                                NavigationLink(destination: SScannerPage().environmentObject(selectedPreferences)) {
+                                    // Your button content
+                                    
+                                    
+                                    ZStack{
+                                        Rectangle()
+                                            .foregroundColor(.clear)
+                                            .frame(width: 178, height: 52)
+                                            .background(Color(red: 1, green: 0.89, blue: 0.57))
+                                            .cornerRadius(17)
+                                            .shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4)
+                                        
+                                        HStack{
+                                            Rectangle()
+                                                .foregroundColor(.clear)
+                                                .frame(width: 40, height: 40)
+                                                .background(
+                                                    Image("Image 34")
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                        .frame(width: 40, height: 40)
+                                                        .clipped()
+                                                )
+                                            
+                                            Text("SCAN NOW")
+                                                .font(
+                                                    Font.custom("Roboto", size: 18)
+                                                        .weight(.bold)
+                                                )
+                                                .kerning(0.36)
+                                                .foregroundColor(.black)
+                                        }
+                                    }
+                                    .offset(x:-65,y:40)
+                                }
+                                
+                                
+                                Rectangle()
+                                    .foregroundColor(.clear)
+                                    .frame(width: 201, height: 375)
+                                    .background(
+                                        Image("Image 35")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                    )
+                                    .shadow(color: .black.opacity(0.25), radius:2, x: 0, y: 4)
+                                    .offset(x:100,y:80)
+                            }
+                            
+                        }
+                        .offset(y:-20)
+                    }
+                    
+                    Text("Popular Recipes")
+                        .font(
+                            Font.custom("AvenirNextCondensed-Bold", size: 30)
+                                .weight(.bold)
+                        )
+                        .kerning(0.48)
+                        .foregroundColor(Color(red: 0.42, green: 0.41, blue: 0.5))
+                        .frame(width: 249, height: 0, alignment: .topLeading)
+                        .offset(x:-50,y:-70)
+                    
+                    ZStack {
+                        TabView(selection: $currentIndex) {
+                            ForEach(0..<images.count) { index in
+                                Image(images[index])
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 370, height: 500)
+                                    .tag(index)
+                                    .padding(.top, 80)
+                                    .padding(.bottom, 50)
+                                    .gesture(
+                                        TapGesture()
+                                            .onEnded { _ in
+                                                // Handle tap gesture
+                                                handleImageTap(index)
+                                            }
+                                    )
                             }
                         }
-                        .modifier(KeyboardAwareModifier())
-                        .padding(.leading, 20)
-                        .padding(.trailing, 19)
-                        .padding(.top, 12)
-                        .padding(.bottom, 11)
-                        .background(.black.opacity(0))
-                        .cornerRadius(4)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 4)
-                                .inset(by: -0.5)
-                                .size(width: 374, height: 50)
-                                .stroke(.black, lineWidth: 1)
-                                .offset(x: 20)
-                        )
+                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                       // .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always)
+                           // )
+                        
+                        
+                        .onAppear {
+                            // Start timer for auto-swipe
+                            startTimer()
+                        }
+                        .onDisappear {
+                            // Stop timer when view disappears
+                            stopTimer()
+                        }
+                        .offset(x:-1,y: -80)
                     }
-                    //.offset(y:2)
+                    
+                    
+                    
+                    
+                    
                 }
-                .frame(width: 415, height: 354)
-                .background(Color(red: 0.99, green: 0.71, blue: 0))
-                .cornerRadius(58) //yellow box finish
-                .padding(-10)
+                .padding(.trailing, 10)
+                .environmentObject(selectedPreferences)
+                .navigationBarBackButtonHidden(true)
+                
+                .sheet(isPresented: $isRecipePopupVisible) {
+                    if isFetchingRecipe {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .foregroundColor(.green)
+                    } else {
+                        RecipeDisplayPage(generatedRecipe: generatedRecipe)
+                    }
+                }
+                //.offset(y:-100)
+                
+                //                ZStack {
+                //                    VStack {
+                //                        HStack {
+                //                            TextField("How to make egg curry?", text: $chat)
+                //                                .font(Font.custom("Inter", size: 18))
+                //                                .foregroundColor(Color(red: 0.22, green: 0.22, blue: 0.22))
+                //                                .offset(x: 10)
+                //
+                //                            Button(action: {
+                //                                generateRecipe()
+                //                            }) {
+                //                                Image("Image 3")
+                //                                    .frame(width: 24, height: 24)
+                //                                    .offset(x: -10)
+                //                            }
+                //                            .sheet(isPresented: $isRecipePopupVisible) {
+                //                                RecipeDisplayPage(generatedRecipe: generatedRecipe)
+                //                            }
+                //                        }
+                //                        .modifier(KeyboardAwareModifier())
+                //                        .padding(.leading, 20)
+                //                        .padding(.trailing, 19)
+                //                        .padding(.top, 12)
+                //                        .padding(.bottom, 11)
+                //                        .background(.black.opacity(0))
+                //                        .cornerRadius(4)
+                //                        .overlay(
+                //                            RoundedRectangle(cornerRadius: 4)
+                //                                .inset(by: -0.5)
+                //                                .size(width: 374, height: 50)
+                //                                .stroke(.black, lineWidth: 1)
+                //                                .offset(x: 20)
+                //                        )
+                //                    }
+                //                    //.offset(y:2)
+                //                }
+                
+                
             }
-            .offset(y: 54)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
         }
-        .navigationBarBackButtonHidden(true)
-        .overlay(
-            // Loading indicator
-            Group {
-                if isFetchingRecipe {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                        .foregroundColor(.green)
-                        .padding(.bottom, 20)
-                }
-            }
+            .ignoresSafeArea(.keyboard, edges: .bottom)
             
-        )
-        .sheet(isPresented: $isRecipePopupVisible) {
-            if isFetchingRecipe {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-                    .foregroundColor(.green)
-            } else {
-                RecipeDisplayPage(generatedRecipe: generatedRecipe)
+            
+                    
+            
+            
+            
+            
+            }
+        
+        
+                .frame(width: 420, height: 874)
+                .offset(x:3)
+                
+                .background(Color(red: 0.96, green: 0.96, blue: 0.96))
+          // .offset(y: 85)
+           .ignoresSafeArea(edges: .top)
+            .ignoresSafeArea(edges: .bottom)
+            
+        }
+    func handleImageTap(_ index: Int) {
+        // Handle tap gesture on image
+        switch index {
+        case 0:
+            chat = "Wasabi Potato Mash"
+        case 1:
+            chat = "Sushi Rolls"
+        case 2:
+            chat = "Paneer Stir Fry"
+        default:
+            break
+        }
+        generateRecipe()
+    }
+       
+        
+    private func startTimer() {
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { timer in
+            withAnimation {
+                currentIndex = (currentIndex + 1) % images.count
             }
         }
     }
+    
+    private func stopTimer() {
+        // Invalidate timer to stop it
+        // This will ensure that the timer is stopped when the view disappears
+        // and doesn't continue running unnecessarily
+        timer?.invalidate()
+    }
+    
+
+
     
     private func generateRRecipe(for category: String) {
         let prompt = "\(category)\nStep-by-Step Recipe and also mention ingredients to use, be friendly and also consider user is a bachelor so he/she has minimum idea of cooking."
@@ -238,6 +364,8 @@ struct ContentView: View {
 
     
     private func generateRecipe() {
+        isFetchingRecipe = true
+        
         isLoading = true
         let prompt = "\(chat)\nStep-by-Step Recipe and also mention ingredients to use, be friendly and also consider user is a bachelor so he/she has minimum idea of cooking."
         sendPromptToChatGPT(prompt: prompt)
@@ -246,7 +374,7 @@ struct ContentView: View {
     private func sendPromptToChatGPT(prompt: String) {
         isLoading = false
         isRecipePopupVisible = true
-        guard let url = URL(string: "") else {
+        guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
             print("Invalid URL")
             return
         }
@@ -257,8 +385,8 @@ struct ContentView: View {
         request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         
         let parameters: [String: Any] = [
-            "model": "",
-            "messages": [[: prompt]]
+            "model": "gpt-3.5-turbo",
+            "messages": [["role": "user", "content": prompt]]
         ]
         
         do {
@@ -297,6 +425,7 @@ struct ContentView: View {
     }
 }
 struct RecipeDisplayPage: View {
+    
     var generatedRecipe: String
 
     var body: some View {
@@ -305,7 +434,7 @@ struct RecipeDisplayPage: View {
                 Text("Step-by-Step Recipe")
                     .font(.title)
                     .fontWeight(.bold)
-                    .foregroundColor(.blue)
+                    .foregroundColor(Color(red: 0.51, green: 0.73, blue: 0.71))
                     .padding(.top, 20)
                 
                 ForEach(generatedRecipe.components(separatedBy: "\n"), id: \.self) { step in
