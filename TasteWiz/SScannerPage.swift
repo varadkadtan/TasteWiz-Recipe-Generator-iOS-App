@@ -40,7 +40,7 @@ struct SScannerPage: View {
 
 
 
-    let apiKey = "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"
+    let apiKey = "YOUR_API_KEY"
 
 
 
@@ -530,7 +530,7 @@ struct RRecipeGeneratedPage: View, Identifiable {
 
     var selectedVegetablesWithQuantity: [(String, Int)] // Adjusted to include quantity
 
-    let apiKey = "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"
+    let apiKey = "YOUR_API_KEY"
 
 
 

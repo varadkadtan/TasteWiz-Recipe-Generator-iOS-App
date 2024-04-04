@@ -22,7 +22,7 @@ struct ContentView: View {
     
        let images = ["Image 36", "Image 37", "Image 38"] // Names of your images
     
-    let apiKey = "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"
+    let apiKey = "YOUR_API_KEY"
     
     var body: some View {
         
